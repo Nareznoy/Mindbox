@@ -1,6 +1,6 @@
 ﻿namespace GeometryLib
 {
-  interface IShape
+  public interface IShape
   {
     /// <summary>
     /// Calculates and returns the area of the shape.
