@@ -21,6 +21,12 @@ namespace GeometryLib
     /// <param name="sideC">The length of side C.</param>
     public Triangle(double sideA, double sideB, double sideC)
     {
+      if (sideA <= 0 || sideB <= 0 || sideC <= 0)
+      {
+        throw new ArgumentException(
+          "Triangle sides must be positive and non-zero.");
+      }
+
       if (!GetIsValidTriangle(sideA, sideB, sideC))
       {
         throw new ArgumentException(

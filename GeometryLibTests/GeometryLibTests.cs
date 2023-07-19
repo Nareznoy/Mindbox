@@ -8,21 +8,49 @@ namespace GeometryLibTests
   public class GeometryLibTests
   {
     [TestMethod]
-    public void TestCircleArea()
+    public void Circle_Constructor_ShouldCreateCircle_ForValidCircle()
     {
       // Arrange
-      double radius = 5;
-      Circle circle = new Circle(radius);
+      double radius = 5.0;
 
       // Act
-      double area = circle.CalculateArea();
+      Circle circle = new Circle(radius);
 
       // Assert
-      Assert.AreEqual(Math.PI * radius * radius, area);
+      Assert.IsNotNull(circle);
     }
 
     [TestMethod]
-    public void Constructor_ShouldCreateTriangle_ForValidTriangle()
+    [ExpectedException(typeof(ArgumentException))]
+    public void Circle_Constructor_ShouldThrowArgumentException_ForNegativeRadius()
+    {
+      // Arrange
+      double radius = -5.0;
+
+      // Act
+      Circle circle = new Circle(radius);
+
+      // Assert
+      // Is handled by ExpectedException attribute
+    }
+
+    [TestMethod]
+    public void Circle_CalculateArea_ShouldReturnCorrectArea()
+    {
+      // Arrange
+      double radius = 3.0;
+      double expectedArea = Math.PI * Math.Pow(radius, 2);
+
+      // Act
+      Circle circle = new Circle(radius);
+      double area = circle.CalculateArea();
+
+      // Assert
+      Assert.AreEqual(expectedArea, area, 0.0001);
+    }
+
+    [TestMethod]
+    public void Triangle_Constructor_ShouldCreateTriangle_ForValidTriangle()
     {
       // Arrange
       double a = 3.0;
@@ -38,7 +66,7 @@ namespace GeometryLibTests
 
     [TestMethod]
     [ExpectedException(typeof(ArgumentException))]
-    public void Constructor_ShouldThrowArgumentException_ForInvalidTriangle()
+    public void Triangle_Constructor_ShouldThrowArgumentException_ForInvalidTriangle()
     {
       // Arrange
       double a = 5.0;
@@ -53,7 +81,23 @@ namespace GeometryLibTests
     }
 
     [TestMethod]
-    public void TestTriangleArea()
+    [ExpectedException(typeof(ArgumentException))]
+    public void Triangle_Constructor_ShouldThrowArgumentException_ForNegativeSide()
+    {
+      // Arrange
+      double a = 3.0;
+      double b = -4.0;
+      double c = 5.0;
+
+      // Act
+      Triangle triangle = new Triangle(a, b, c);
+
+      // Assert
+      // Is handled by ExpectedException attribute
+    }
+
+    [TestMethod]
+    public void Triangle_CalculateArea_ShouldReturnCorrectArea()
     {
       // Arrange
       double sideA = 3;
@@ -69,7 +113,7 @@ namespace GeometryLibTests
     }
 
     [TestMethod]
-    public void GetIsRightAngled_ShouldReturnTrue()
+    public void Triangle_GetIsRightAngled_ShouldReturnTrue()
     {
       // Arrange
       double a = 2.5;
@@ -85,7 +129,7 @@ namespace GeometryLibTests
     }
 
     [TestMethod]
-    public void GetIsRightAngled_ShouldReturnFalse()
+    public void Triangle_GetIsRightAngled_ShouldReturnFalse()
     {
       // Arrange
       double a = 3.5;

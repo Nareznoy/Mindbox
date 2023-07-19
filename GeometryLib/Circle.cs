@@ -15,6 +15,12 @@ namespace GeometryLib
     /// <param name="radius">The radius of the circle.</param>
     public Circle(double radius)
     {
+      if (radius <= 0)
+      {
+        throw new ArgumentException(
+          "Circle radius must be a positive non-zero value.");
+      }
+
       _radius = radius;
     }
 
